@@ -21,7 +21,9 @@ namespace SidmachStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ICustomer, MockCustomer>();
+            services.AddDbContextPool<CustomerContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("CustomerContextConnectionStrings")));
+            
+            services.AddScoped<ICustomer, SqlCustomerData>();
 
             /*services.AddSingleton<IProduct, MockProduct>();*/
 
