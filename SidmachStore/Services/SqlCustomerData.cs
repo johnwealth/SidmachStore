@@ -8,7 +8,7 @@ namespace SidmachStore.Services
 {
     public class SqlCustomerData : ICustomer
     {
-        private CustomerContext _customerContext;
+        private readonly CustomerContext _customerContext;
         public SqlCustomerData(CustomerContext customerContext)
         {
             _customerContext = customerContext;
@@ -23,12 +23,20 @@ namespace SidmachStore.Services
 
         public void DeleteCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerContext.Customers.Remove(customer);
+            _customerContext.SaveChanges();
         }
 
         public Customer EditCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            var existingCustomer = _customerContext.Customers.Find(customer.Id);
+            if(existingCustomer != null)
+            {
+                _customerContext.Customers.Update(existingCustomer);
+                _customerContext.SaveChanges();
+            }
+
+            return customer;
         }
 
         public Customer GetCustomer(Guid id)

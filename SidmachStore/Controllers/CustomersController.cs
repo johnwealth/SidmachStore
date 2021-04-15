@@ -10,7 +10,7 @@ namespace SidmachStore.Controllers
 {
     public class CustomersController : ControllerBase
     {
-        private ICustomer _customer;
+        private readonly ICustomer _customer;
 
         public CustomersController(ICustomer customer)
         {
