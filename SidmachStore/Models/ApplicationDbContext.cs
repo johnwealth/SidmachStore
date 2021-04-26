@@ -11,17 +11,8 @@ namespace SidmachStore.Models
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
     }
 }
 
-/*
-public class SidmachContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
-{
-    public ApplicationDbContext CreateDbContext(string[] args)
-    {
-        var optionsBuilder = new DbContextOptionsBuilder<CustomerContext, ProductContext>();
-        optionsBuilder.UseSqlite("Data Source=SidmachStore.db");
-
-        return new ApplicaionDbContext(optionsBuilder.Options);
-    }
-}*/

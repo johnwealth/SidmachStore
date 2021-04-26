@@ -10,8 +10,8 @@ using SidmachStore.Models;
 namespace SidmachStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210425235812_AddMigration")]
-    partial class AddMigration
+    [Migration("20210426094503_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,10 +23,9 @@ namespace SidmachStore.Migrations
 
             modelBuilder.Entity("SidmachStore.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -34,7 +33,7 @@ namespace SidmachStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("SidmachStore.Models.Customer", b =>
@@ -69,8 +68,8 @@ namespace SidmachStore.Migrations
                     b.Property<byte>("CategoryId")
                         .HasColumnType("tinyint");
 
-                    b.Property<int?>("CategoryId1")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CategoryId1")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");

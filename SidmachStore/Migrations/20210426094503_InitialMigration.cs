@@ -3,21 +3,20 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SidmachStore.Migrations
 {
-    public partial class AddMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -42,16 +41,16 @@ namespace SidmachStore.Migrations
                     ProductName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ProductDescription = table.Column<int>(type: "int", maxLength: 300, nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    CategoryId1 = table.Column<int>(type: "int", nullable: true),
+                    CategoryId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CategoryId = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Category_CategoryId1",
+                        name: "FK_Products_Categories_CategoryId1",
                         column: x => x.CategoryId1,
-                        principalTable: "Category",
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -71,7 +70,7 @@ namespace SidmachStore.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Categories");
         }
     }
 }
