@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SidmachStore.Controllers
 {
-    public class CustomersController : ControllerBase
+    public class CustomersController : Controller
     {
         private ICustomer _customer;
 
